@@ -1,11 +1,23 @@
 import styled from "styled-components"
 
 export const CardItem = styled.div`
-    width: 200px;
+    width: 187px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    justify-content: space-between;
+
+    &:hover {
+        box-shadow: inset 0 0 0 1px #848484;
+    }
+`
+
+export const TextParagraph = styled.p`
+    width: 187px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+
 `
 
 export const TextCardButton = styled.div`
@@ -29,4 +41,8 @@ export const TextCardButton = styled.div`
     justify-content: space-between;
     background-position: center;
   }
+`
+
+export const LoadingGif = styled.div`
+    margin: 100px auto;
 `
