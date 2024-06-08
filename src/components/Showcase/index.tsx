@@ -1,11 +1,11 @@
-import Card from "./Card";
+import CharacterList from "./CharacterList";
 
 export default function Showcase() {
-    return (
-      <>
-        <main className="showcase">
-          <Card />
-        </main>
-      </>
-    )
-  }
+  return (
+    <>
+      <main className="showcase">
+        <CharacterList />
+      </main>
+    </>
+  )
+}
