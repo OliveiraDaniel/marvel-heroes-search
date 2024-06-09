@@ -1,46 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { getCharacters } from './../../services/characterApi'
-import Card from './Card';
-import { Character } from '../../types/Character';
-import Image from '../Image';
-import { LoadingGif } from './style';
+import Card from './Card'
+import { Character } from '../../types/Character'
+import { LoadingGif } from './../../utils/styles'
 
 const CharacterList: React.FC = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [characters, setCharacters] = useState<Character[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        setLoading(true);
-        const data = await getCharacters();
-        setCharacters(data.data.results);
+        setLoading(true)
+        const data = await getCharacters()
+        setCharacters(data.data.results)
       } catch (error) {
-        setError('Failed to fetch characters');
+        setError('Não encontramos nenhum personagem')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchCharacters();
-  }, []);
+    fetchCharacters()
+  }, [])
 
   if (loading) {
-    return <LoadingGif><Image width={100} src="assets/loading.gif" alt="loading" /></LoadingGif>;
+    return <LoadingGif />
   }
 
-  console.log('characters', characters)
+  if (error) {
+    return <p>{error}</p>
+  }
 
   return (
     <ul>
         {characters.map((character) => (
             <li key={character.id} >
-              <Card name={character.name} image={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
+              <Card id={character.id} name={character.name} image={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
             </li>
         ))}
         </ul>
-  );
-};
+  )
+}
 
-export default CharacterList;
+export default CharacterList

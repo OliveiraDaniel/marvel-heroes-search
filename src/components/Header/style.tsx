@@ -8,10 +8,13 @@ export const Header = styled.h1`
 
 export const HyperTextTwo = styled.h2`
     text-align: center;
+    color: #464646;
+    font-size: 28px;
 `
 
 export const HyperTextThree = styled.h3`
     text-align: center;
     font-size: 16px;
     color: #848484;
+    font-weight: 500;
 `

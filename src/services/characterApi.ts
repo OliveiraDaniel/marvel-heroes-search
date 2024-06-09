@@ -10,18 +10,33 @@ const generateHash = (timestamp: string, privateKey: string, publicKey: string) 
   return md5(timestamp + privateKey + publicKey).toString()
 }
 
-export const getCharacters = async (params = {}) => {
-  const timestamp = new Date().getTime().toString()
-  const hash = generateHash(timestamp, API_PRIVATE_KEY, API_PUBLIC_KEY)
+const generateParams = (additionalParams = {}) => {
+  const timestamp = new Date().getTime().toString();
+  const hash = generateHash(timestamp, API_PRIVATE_KEY, API_PUBLIC_KEY);
+  
+  return {
+    ...additionalParams,
+    ts: timestamp,
+    apikey: API_PUBLIC_KEY,
+    hash: hash,
+  };
+};
 
+export const getCharacters = async (params = {}) => {
   try {
     const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}`, {
-      params: {
-        ...params,
-        ts: timestamp,
-        apikey: API_PUBLIC_KEY,
-        hash: hash,
-      },
+      params: generateParams(params),
+    })
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getCharacterByID = async (id: string, params = {}) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}/${id}`, {
+      params: generateParams(params),
     })
     return response.data
   } catch (error) {
