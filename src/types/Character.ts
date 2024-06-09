@@ -15,15 +15,15 @@ export type Character = {
     extension: string
     },
     comics: {
-    available: number,
-    returned: number,
-    collectionURI: string,
-    items: [
-        {
-        resourceURI: string,
-        name: string
-        }
-    ]
+        available: number,
+        returned: number,
+        collectionURI: string,
+        items: [
+            {
+                resourceURI: string,
+                name: string
+            }
+        ]
     },
     stories: {
     available: number,

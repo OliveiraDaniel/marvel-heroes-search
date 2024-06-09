@@ -1,19 +1,22 @@
-import Header from './components/Header';
-import Search from './components/Search';
-import Footer from './components/Footer';
-import Showcase from './components/Showcase';
-import Container from './components/Container';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Container from './components/Container'
+import Showcase from './components/Showcase'
+import HeroDetails from './components/HeroDetails'
 
-function App() {
+const App = () => {
   return (
-    <>
+    <Router>
       <Header />
-        <Container>
-          <Search placeholder={'Busque o Herói'} />
-          <Showcase />
-        </Container>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Showcase />} />
+          <Route path="/hero/:id" element={<HeroDetails />} />
+        </Routes>
+      </Container>
       <Footer />
-    </>
+    </Router>
   )
 }
 
