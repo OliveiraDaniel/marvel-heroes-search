@@ -1,62 +1,74 @@
-export type Character = {
-    id: number,
-    name: string,
-    description: string,
-    modified: Date,
-    resourceURI: string,
+export type Comics = {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: [
+      {
+        resourceURI: string;
+        name: string;
+      },
+    ];
+  };
+  
+  export type Character = {
+    id: number;
+    name: string;
+    description: string;
+    modified: Date;
+    resourceURI: string;
     urls: [
-    {
-        type: string,
-        url: string
-    }
-    ],
+      {
+        type: string;
+        url: string;
+      },
+    ];
     thumbnail: {
-    path: string,
-    extension: string
-    },
+      path: string;
+      extension: string;
+    };
     comics: {
-        available: number,
-        returned: number,
-        collectionURI: string,
-        items: [
-            {
-                resourceURI: string,
-                name: string
-            }
-        ]
-    },
+      available: number;
+      returned: number;
+      collectionURI: string;
+      items: [
+        {
+          resourceURI: string;
+          name: string;
+        },
+      ];
+    };
     stories: {
-    available: number,
-    returned: number,
-    collectionURI: string,
-    items: [
+      available: number;
+      returned: number;
+      collectionURI: string;
+      items: [
         {
-        resourceURI: string,
-        name: string,
-        type: string
-        }
-    ]
-    },
+          resourceURI: string;
+          name: string;
+          type: string;
+        },
+      ];
+    };
     events: {
-    available: number,
-    returned: number,
-    collectionURI: string,
-    items: [
+      available: number;
+      returned: number;
+      collectionURI: string;
+      items: [
         {
-        resourceURI: string,
-        name: string
-        }
-    ]
-    },
+          resourceURI: string;
+          name: string;
+        },
+      ];
+    };
     series: {
-    available: number,
-    returned: number,
-    collectionURI: string,
-    items: [
+      available: number;
+      returned: number;
+      collectionURI: string;
+      items: [
         {
-        resourceURI: string,
-        name: string
-        }
-    ]
-    }
-}
+          resourceURI: string;
+          name: string;
+        },
+      ];
+    };
+  };

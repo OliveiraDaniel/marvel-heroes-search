@@ -6,6 +6,12 @@ export const CardItem = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    &:hover {
+      p {
+        text-decoration: underline;
+      }
+    }
 `
 
 export const TextParagraph = styled.p`
@@ -22,6 +28,7 @@ export const TextCardButton = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 185px;
+  align-items: center;
 
   p {
     font-weight: bold;
