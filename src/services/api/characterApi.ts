@@ -6,13 +6,6 @@ const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 const API_PUBLIC_KEY = import.meta.env.VITE_API_PUBLIC_KEY;
 const API_PRIVATE_KEY = import.meta.env.VITE_API_PRIVATE_KEY;
 
-interface Params {
-  ts: string;
-  apikey: string;
-  hash: string;
-  nameStartsWith?: string;
-}
-
 const generateHash = (timestamp: string, privateKey: string, publicKey: string) => {
   return md5(timestamp + privateKey + publicKey).toString()
 }
@@ -29,12 +22,14 @@ const generateParams = (additionalParams = {}) => {
   };
 };
 
-export const getCharacters = async (searchValue = '') => {
+export const getCharacters = async (searchValue = '', offset = 0, limit = 20, orderBy: string) => {
   try {
-    const params:Params = generateParams()
-    if (searchValue) {
-      params.nameStartsWith = searchValue
-    }
+    const params = generateParams({
+      ...(searchValue ? { nameStartsWith: searchValue } : {}),
+      offset,
+      limit,
+      orderBy,
+    })
     const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}`, { params })
     return response.data
   } catch (error) {
@@ -55,7 +50,7 @@ export const getCharacterByID = async (id: string, params = {}) => {
 
 export const getComicsByCharacterID = async (id: string, params = {}) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}/${id.split(':')[1]}/comics`, {
+    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}/${id}/comics`, {
       params: generateParams(params),
     })
     return response.data

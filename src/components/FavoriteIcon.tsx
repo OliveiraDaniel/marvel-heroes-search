@@ -1,7 +1,12 @@
 import { FavoriteStyle } from "./styles"
 
-export default function FavoriteButton() {
+interface FavoriteButtonProps {
+  onClick?: () => void;
+  isFavorite: boolean;
+}
+
+export default function FavoriteButton({onClick, isFavorite}: FavoriteButtonProps) {
   return (
-    <FavoriteStyle onClick={()=> {console.log('click')}} />
+    <FavoriteStyle onClick={onClick} isFavorite={isFavorite}/>
   )
 }

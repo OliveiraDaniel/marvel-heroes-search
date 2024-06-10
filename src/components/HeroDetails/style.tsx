@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeroDetailContainer = styled.div`
-    width: 25%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     padding: 10px 50px;
@@ -16,7 +16,7 @@ export const ContainerName = styled.div`
 `
 
 export const ContainerDescription = styled.div`
-    color: #848484;
+    color: #8c8c8c;
 `
 
 export const ContainerInfo = styled.div`
@@ -45,7 +45,7 @@ export const ContainerInfo = styled.div`
         margin-right: 15px;
         align-items: center;
         font-weight: 700;
-        color: #464646;
+        color: #404040;
         font-size: 15px;
     }
 
@@ -79,13 +79,13 @@ export const ContainerImage = styled.div`
     width: 50%;
 
     img {
-        max-width: 550px;
+        max-width: 100%;
     }
 `
 export const ContainerLastHq = styled.div`
     span {
         margin-left: 10px;
-        color: #464646;
+        color: #404040;
         font-size: 15px;
         font-weight: 500;
       }
@@ -96,11 +96,21 @@ export const ContainerLastComics = styled.div`
     width: 100%;
     flex-direction: column;
     margin-top: 35px;
+    max-width: 1200px;
 
     h3 {
         text-align: left;
         font-weight: bold;
         color: #646464;
+        padding-left: 25px;
+    }
+
+    span {
+        text-align: left;
+        font-weight: bold;
+        color: #646464;
+        margin: 5px 0;
+        display: block;
     }
 
     ul {
@@ -109,14 +119,30 @@ export const ContainerLastComics = styled.div`
         align-items: flex-start;
         flex-wrap: wrap;
         padding: 0;
-        justify-content: center;
 
         li {
-            width: 190px;
+            width: 200px;
             font-size: 13px;
-            width: 155px;
-            font-size: 13px;
-            margin-right: 50px;
+            margin-bottom: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                display: flex;
+                justify-content: start;
+                margin: 0;
+            }
+
+            span {
+                width: 150px;
+            }
+
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
         }
     }
 `
