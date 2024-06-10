@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { getCharacters } from './../../services/characterApi'
+import { getCharacters } from './../../services/api/characterApi'
 import Card from './Card'
 import { Character } from '../../types/Character'
-import { LoadingGif } from './../../utils/styles'
+import { LoadingGif } from './../styles'
 
 const CharacterList: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([])

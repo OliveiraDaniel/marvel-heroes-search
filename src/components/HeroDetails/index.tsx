@@ -2,10 +2,10 @@ import { useParams } from 'react-router-dom';
 import { HyperTextTwo } from '../Header/style';
 import Image from '../Image';
 import { useEffect, useState } from 'react';
-import { fetchCharactersById } from '../../services/getCharacterById';
-import { LoadingGif, StrongText } from './../../utils/styles';
+import { fetchCharactersById } from '../../services/api/getCharacterById';
+import { LoadingGif, StrongText } from './../styles'
 import { Character } from '../../types/Character';
-import FavoriteIcon from '../../utils/FavoriteIcon';
+import FavoriteIcon from './../FavoriteIcon';
 import {
   ContainerDescription,
   ContainerImage,
