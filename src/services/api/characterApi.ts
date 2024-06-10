@@ -6,6 +6,13 @@ const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 const API_PUBLIC_KEY = import.meta.env.VITE_API_PUBLIC_KEY;
 const API_PRIVATE_KEY = import.meta.env.VITE_API_PRIVATE_KEY;
 
+interface Params {
+  ts: string;
+  apikey: string;
+  hash: string;
+  nameStartsWith?: string;
+}
+
 const generateHash = (timestamp: string, privateKey: string, publicKey: string) => {
   return md5(timestamp + privateKey + publicKey).toString()
 }
@@ -22,11 +29,13 @@ const generateParams = (additionalParams = {}) => {
   };
 };
 
-export const getCharacters = async (params = {}) => {
+export const getCharacters = async (searchValue = '') => {
   try {
-    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}`, {
-      params: generateParams(params),
-    })
+    const params:Params = generateParams()
+    if (searchValue) {
+      params.nameStartsWith = searchValue
+    }
+    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}`, { params })
     return response.data
   } catch (error) {
     throw error
