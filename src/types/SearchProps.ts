@@ -1,5 +1,4 @@
 export type SearchProps = {
-    placeholder: string,
-    value?: string,
-    onSearchChange?: (value: string) => void,
-}
+    placeholder: string;
+    onSearchChange: (value: string) => void;
+  };

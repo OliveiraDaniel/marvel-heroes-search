@@ -8,10 +8,10 @@ export default function Showcase() {
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
   }
-  
+
   return (
     <main className="showcase">
-      <Search placeholder={'Procure por heróis'} onSearchChange={handleSearchChange} />
+      <Search placeholder={'Procure por heróis'} setSearchValue={setSearchValue} onSearchChange={handleSearchChange} />
       <CharacterList searchValue={searchValue} />
     </main>
   )

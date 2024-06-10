@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { HyperTextTwo } from '../Header/style';
-import Image from '../Image';
-import { useEffect, useState } from 'react';
-import { fetchCharactersById } from '../../services/api/getCharacterById';
-import { LoadingGif, StrongText } from '../styles';
-import { Character } from '../../types/Character';
-import FavoriteIcon from '../FavoriteIcon';
+import { useParams } from 'react-router-dom'
+import { HyperTextTwo } from '../Header/style'
+import Image from '../Image'
+import { useEffect, useState } from 'react'
+import { fetchCharactersById } from '../../services/api/getCharacterById'
+import { LoadingGif, StrongText } from '../styles'
+import { Character } from '../../types/Character'
+import FavoriteIcon from '../FavoriteIcon'
 import {
   ContainerDescription,
   ContainerImage,
@@ -15,38 +15,48 @@ import {
   ContainerName,
   ContainerRatings,
   HeroDetailContainer,
-} from './style';
-import LatestRelease from './LatestRelease';
-import { fetchComicsById } from '../../services/api/getComics';
-import { ComicItem } from '../../types/ComicItem';
+} from './style'
+import LatestRelease from './LatestRelease'
+import { fetchComicsById } from '../../services/api/getComics'
+import { ComicItem } from '../../types/ComicItem'
 
 export default function HeroDetails() {
-  const { id } = useParams();
-  const [hero, setHero] = useState<Character>();
-  const [comics, setComics] = useState<ComicItem[]>();
-  const [loading, setLoading] = useState<boolean>(true);
+  const { id } = useParams()
+  const numberId = id?.split(':')[1]
+  console.log('numberIdnumberId', numberId)
+  const [hero, setHero] = useState<Character>()
+  const [comics, setComics] = useState<ComicItem[]>()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchHeroDetails = async () => {
       try {
-        const heroData = await fetchCharactersById(id as string);
-        const comicsData = await fetchComicsById(id as string);
-        setHero(heroData);
-        setComics(comicsData);
-        setLoading(false);
+        const heroData = await fetchCharactersById(numberId as string)
+        const comicsData = await fetchComicsById(numberId as string)
+        setHero(heroData)
+        setComics(comicsData)
+        setLoading(false)
       } catch (error) {
-        console.error('Failed to fetch hero details:', error);
-        setLoading(false);
+        console.error('Failed to fetch hero details:', error)
+        setLoading(false)
       }
-    };
+    }
 
     if (id) {
-      fetchHeroDetails();
+      fetchHeroDetails()
     }
-  }, [id]);
+  }, [id])
 
   if (loading) {
-    return <LoadingGif />;
+    return <LoadingGif />
+  }
+
+  const handleFavoriteClick = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const updatedFavorites = [...favorites, id];
+    localStorage.setItem('favoriteHeroes', JSON.stringify(updatedFavorites));
+    setIsFavorite(!isFavorite);
   }
 
   const generateRatings = (max: number) => {
@@ -54,23 +64,23 @@ export default function HeroDetails() {
       <li key={index}>
         <Image src={'/assets/avaliacao_off.svg'} alt="avaliação" />
       </li>
-    ));
-  };
+    ))
+  }
 
   const maxNumberInsideParentheses = hero?.comics.items
     .flatMap((comic) => {
-      const matches = comic.name.match(/\((\d{4})\)/g);
-      return matches ? matches : [];
+      const matches = comic.name.match(/\((\d{4})\)/g)
+      return matches ? matches : []
     })
     .map((match) => parseInt(match.slice(1, -1)))
-    .reduce((max, number) => Math.max(max, number), 0);
+    .reduce((max, number) => Math.max(max, number), 0)
 
   return (
     <>
       <HeroDetailContainer>
         <ContainerName>
           <HyperTextTwo>{hero?.name}</HyperTextTwo>
-          <FavoriteIcon />
+          <FavoriteIcon onClick={handleFavoriteClick} isFavorite={isFavorite}/>
         </ContainerName>
         <ContainerDescription>
           <p>
@@ -117,5 +127,5 @@ export default function HeroDetails() {
         {LatestRelease(comics as any)}
       </ContainerLastComics>
     </>
-  );
+  )
 }

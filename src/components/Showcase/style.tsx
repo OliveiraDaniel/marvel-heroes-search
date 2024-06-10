@@ -32,10 +32,40 @@ export const TextCardButton = styled.div`
 
   p {
     font-weight: bold;
-    color: #464646;
+    color: #404040;
   }
 `
 
 export const LoadingGif = styled.div`
     margin: 100px auto;
+`
+
+export const PaginationButton = styled.button`
+  width: 0;
+  height: 0;
+  margin: auto 50px;
+  background: #fff;
+  cursor: pointer;
+
+  &:hover {
+    opacity:0.8;
+  }
+
+  &:disabled {
+    opacity:0.5;
+  }
+
+  &.right {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid red;
+    border-right: none;
+  }
+
+  &.left {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 20px solid red;
+    border-left: none;
+  }
 `

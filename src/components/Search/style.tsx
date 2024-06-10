@@ -13,10 +13,10 @@ export const Input = styled.input`
     background: url('/assets/ic_busca.svg') #ffeeee no-repeat 15px 25px;
     text-indent: 70px;
     font-size: 18px;
-    color: #ff0000;
+    color: #fa7c7c;
 
     &::placeholder {
-        color: #ff0000;
+        color: #fa7c7c;
         font-family: Roboto, sans-serif;
     }
 `

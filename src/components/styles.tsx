@@ -8,10 +8,10 @@ export const LoadingGif = styled.div`
     height: 150px;
 `
 
-export const FavoriteStyle = styled.button`
+export const FavoriteStyle = styled.button<{ isFavorite?: boolean }>`
     border: none;
     background-color: #fff;
-    background: url('/assets/favorito_02.svg') no-repeat 0 0;
+    background: url(${props => props.isFavorite ? '/assets/favorito_01.svg' : '/assets/favorito_02.svg'}) no-repeat 0 0;
     width: 35px;
     height: 35px;
     display: flex;
@@ -22,5 +22,5 @@ export const FavoriteStyle = styled.button`
 
 export const StrongText = styled.strong`
     font-weight: bold;
-    color: #464646;
+    color: #404040;
 `

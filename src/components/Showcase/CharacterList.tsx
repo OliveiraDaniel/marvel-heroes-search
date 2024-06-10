@@ -4,6 +4,8 @@ import Card from './Card';
 import { Character } from '../../types/Character';
 import { LoadingGif } from './../styles';
 import { HyperTextTwo } from '../Header/style';
+import { PaginationButton } from './style';
+import ContainerFilters from '../Filters';
 
 interface CharacterListProps {
   searchValue: string;
@@ -13,22 +15,28 @@ const CharacterList = ({ searchValue }: CharacterListProps) => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+  const [orderBy, setOrderBy] = useState<string>('name')
+  const limit = 20;
+
+  const fetchCharacters = async (searchValue: string, page: number, orderBy: string) => {
+    try {
+      setLoading(true);
+      const offset = page * limit;
+      const data = await getCharacters(searchValue, offset, limit, orderBy);
+      setCharacters(data.data.results);
+      setTotal(data.data.total);
+    } catch (error) {
+      setError('Não encontramos nenhum personagem');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        setLoading(true);
-        const data = await getCharacters(searchValue);
-        setCharacters(data.data.results);
-      } catch (error) {
-        setError('Não encontramos nenhum personagem');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCharacters();
-  }, [searchValue])
+    fetchCharacters(searchValue, page, orderBy);
+  }, [searchValue, page, orderBy]);
 
   if (loading) {
     return <LoadingGif />;
@@ -38,18 +46,37 @@ const CharacterList = ({ searchValue }: CharacterListProps) => {
     return <HyperTextTwo>{error}</HyperTextTwo>;
   }
 
+  const handleNextPage = () => {
+    if ((page + 1) * limit < total) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 0) {
+      setPage(page - 1);
+    }
+  };
+
   return (
-    <ul>
-      {characters.map((character) => (
-        <li key={character.id}>
-          <Card
-            id={character.id}
-            name={character.name}
-            image={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ContainerFilters available={characters.length.toString()} orderBy={orderBy} setOrderBy={setOrderBy} />
+      <ul>
+        {characters.map((character) => (
+          <li key={character.id}>
+            <Card
+              id={character.id}
+              name={character.name}
+              image={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+            />
+          </li>
+        ))}
+      </ul>
+      <div className="pagination">
+        <PaginationButton className="left" onClick={handlePreviousPage} disabled={page === 0} />
+        <PaginationButton className="right" onClick={handleNextPage} disabled={(page + 1) * limit >= total} />
+      </div>
+    </>
   );
 };
 
