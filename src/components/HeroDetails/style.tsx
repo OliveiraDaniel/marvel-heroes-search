@@ -90,3 +90,33 @@ export const ContainerLastHq = styled.div`
         font-weight: 500;
       }
 `
+
+export const ContainerLastComics = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 35px;
+
+    h3 {
+        text-align: left;
+        font-weight: bold;
+        color: #646464;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 0;
+        justify-content: center;
+
+        li {
+            width: 190px;
+            font-size: 13px;
+            width: 155px;
+            font-size: 13px;
+            margin-right: 50px;
+        }
+    }
+`

@@ -7,4 +7,4 @@ export const fetchCharactersById = async (id: string) => {
   } catch (error) {
     throw new Error('Failed to fetch characters')
   }
-};
+}

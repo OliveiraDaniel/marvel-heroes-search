@@ -3,31 +3,37 @@ import { HyperTextTwo } from '../Header/style';
 import Image from '../Image';
 import { useEffect, useState } from 'react';
 import { fetchCharactersById } from '../../services/api/getCharacterById';
-import { LoadingGif, StrongText } from './../styles'
+import { LoadingGif, StrongText } from '../styles';
 import { Character } from '../../types/Character';
-import FavoriteIcon from './../FavoriteIcon';
+import FavoriteIcon from '../FavoriteIcon';
 import {
   ContainerDescription,
   ContainerImage,
   ContainerInfo,
+  ContainerLastComics,
   ContainerLastHq,
   ContainerName,
   ContainerRatings,
   HeroDetailContainer,
 } from './style';
+import LatestRelease from './LatestRelease';
+import { fetchComicsById } from '../../services/api/getComics';
+import { ComicItem } from '../../types/ComicItem';
 
 export default function HeroDetails() {
   const { id } = useParams();
   const [hero, setHero] = useState<Character>();
+  const [comics, setComics] = useState<ComicItem[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchHeroDetails = async () => {
       try {
         const heroData = await fetchCharactersById(id as string);
+        const comicsData = await fetchComicsById(id as string);
         setHero(heroData);
+        setComics(comicsData);
         setLoading(false);
-        console.log('heroData', heroData);
       } catch (error) {
         console.error('Failed to fetch hero details:', error);
         setLoading(false);
@@ -77,14 +83,14 @@ export default function HeroDetails() {
           <div className="hq">
             <StrongText>Quadrinhos</StrongText>
             <div className="container-image-qty">
-              <Image src="/assets/ic_quadrinhos.svg" alt="Icone quadrinhos"/>
-              <span>{hero?.comics.items.length || 0}</span>
+              <Image src="/assets/ic_quadrinhos.svg" alt="Icone quadrinhos" />
+              <span>{hero?.comics.available || 0}</span>
             </div>
           </div>
           <div className="movies">
             <StrongText>Filmes</StrongText>
             <div className="container-image-qty">
-              <Image src="/assets/ic_trailer.svg" alt="Icone quadrinhos"/>
+              <Image src="/assets/ic_trailer.svg" alt="Icone quadrinhos" />
               <span>{hero?.series.items.length || 0}</span>
             </div>
           </div>
@@ -100,11 +106,16 @@ export default function HeroDetails() {
       </HeroDetailContainer>
       <ContainerImage>
         <Image
-          src={`${hero?.thumbnail?.path}.${hero?.thumbnail?.extension}` as string}
-          alt="hulk"
+          src={
+            `${hero?.thumbnail?.path}.${hero?.thumbnail?.extension}` as string
+          }
+          alt={hero?.name as string}
           width={550}
         />
       </ContainerImage>
+      <ContainerLastComics>
+        {LatestRelease(comics as any)}
+      </ContainerLastComics>
     </>
   );
 }

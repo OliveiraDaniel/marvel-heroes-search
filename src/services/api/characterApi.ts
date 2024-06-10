@@ -43,3 +43,14 @@ export const getCharacterByID = async (id: string, params = {}) => {
     throw error
   }
 }
+
+export const getComicsByCharacterID = async (id: string, params = {}) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}${API_ENDPOINT}/${id.split(':')[1]}/comics`, {
+      params: generateParams(params),
+    })
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

@@ -22,6 +22,10 @@ a {
   display: flex;
   justify-content: center;
   max-width: 1320px;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-width: 320px;
 }
 
 ul {
@@ -52,8 +56,8 @@ ul {
 
     li {
       box-sizing: border-box;
-      padding: 10px;
-      margin: 5px;
+      padding: 10px 0;
+      margin: 5px 0;
       text-align: center;
       height: 250px;
       align-items: center;
