@@ -53,11 +53,17 @@ export default function HeroDetails() {
   }
 
   const handleFavoriteClick = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    const updatedFavorites = [...favorites, id];
+    const favoriteHeroes = JSON.parse(localStorage.getItem('favoriteHeroes') || '[]');
+    let updatedFavorites;
+    if (isFavorite) {
+      updatedFavorites = favoriteHeroes.filter((favoriteId: string ) => favoriteId !== id);
+    } else {
+      updatedFavorites = [...favoriteHeroes, id?.split(':')[1]];
+    }
+  
     localStorage.setItem('favoriteHeroes', JSON.stringify(updatedFavorites));
     setIsFavorite(!isFavorite);
-  }
+  };
 
   const generateRatings = (max: number) => {
     return Array.from({ length: max }, (_, index) => (

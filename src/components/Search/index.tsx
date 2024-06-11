@@ -12,7 +12,7 @@ export default function Search({ placeholder, setSearchValue }: SearchComponentP
   const handleInputChange = (event: any) => {
     const newValue = event.target.value
     setInputValue(newValue)
-    if (newValue.length > 3) {
+    if (newValue.length > 3 || newValue.length === 0) {
       setSearchValue(newValue);
     }
   };
