@@ -5,7 +5,6 @@ export const Input = styled.input`
     width: 100%;
     max-width: 867px;
     min-width: 300px;
-    margin: 20px auto;
     border-radius: 40px;
     border: none;
     height: 67px;
@@ -17,6 +16,5 @@ export const Input = styled.input`
 
     &::placeholder {
         color: #fa7c7c;
-        font-family: Roboto, sans-serif;
     }
 `

@@ -38,6 +38,7 @@ export const StyledFilters = styled.div`
       align-items: center;
       font-size: 14px;
       color: #fa7c7c;
+      cursor: pointer;
 
       img, span {
         margin-left: 10px;

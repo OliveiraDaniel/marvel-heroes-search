@@ -5,6 +5,11 @@ export const HeroDetailContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px 50px;
+    
+    @media (max-width: 500px) {
+        width: 100%;
+        padding: 0;
+    }
 `
 
 export const ContainerName = styled.div`
@@ -61,6 +66,7 @@ export const ContainerRatings = styled.div`
     display: flex;
     justify-content: flex-start;
     margin-bottom: 35px;
+    
 
     ul {
         display: flex;
@@ -71,6 +77,7 @@ export const ContainerRatings = styled.div`
             margin-left: 5px;
         }
     }
+        
 `
 
 export const ContainerImage = styled.div`
@@ -80,6 +87,11 @@ export const ContainerImage = styled.div`
 
     img {
         max-width: 100%;
+    }
+
+    @media (max-width: 500px) {
+        width: 100%;
+        margin-top: 35px;
     }
 `
 export const ContainerLastHq = styled.div`
@@ -102,7 +114,6 @@ export const ContainerLastComics = styled.div`
         text-align: left;
         font-weight: bold;
         color: #646464;
-        padding-left: 25px;
     }
 
     span {
@@ -119,14 +130,16 @@ export const ContainerLastComics = styled.div`
         align-items: flex-start;
         flex-wrap: wrap;
         padding: 0;
+        justify-content: space-between;
 
         li {
-            width: 200px;
+            width: 185px;
             font-size: 13px;
             margin-bottom: 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-between;
 
             img {
                 display: flex;

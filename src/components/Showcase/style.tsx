@@ -1,17 +1,21 @@
 import styled from "styled-components"
 
 export const CardItem = styled.div`
-    width: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-    &:hover {
-      p {
-        text-decoration: underline;
-      }
+  &:hover {
+    p {
+      text-decoration: underline;
     }
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `
 
 export const TextParagraph = styled.p`
@@ -33,6 +37,10 @@ export const TextCardButton = styled.div`
   p {
     font-weight: bold;
     color: #404040;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 100%;
   }
 `
 

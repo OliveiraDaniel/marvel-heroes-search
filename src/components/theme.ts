@@ -6,7 +6,6 @@ export const colors = {
 };
 
 export const fonts = {
-  primary: 'Roboto, sans-serif',
   regular: 400,
   strong: 700,
 };

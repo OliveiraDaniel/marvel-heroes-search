@@ -14,6 +14,7 @@ interface CharacterListProps {
 const CharacterList = ({ searchValue }: CharacterListProps) => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -26,6 +27,7 @@ const CharacterList = ({ searchValue }: CharacterListProps) => {
       const offset = page * limit;
       const data = await getCharacters(searchValue, offset, limit, orderBy);
       setCharacters(data.data.results);
+      setFilteredCharacters(data.data.results)
       setTotal(data.data.total);
     } catch (error) {
       setError('Não encontramos nenhum personagem');
@@ -60,9 +62,9 @@ const CharacterList = ({ searchValue }: CharacterListProps) => {
 
   return (
     <>
-      <ContainerFilters available={characters.length.toString()} orderBy={orderBy} setOrderBy={setOrderBy} />
+      <ContainerFilters available={characters.length.toString()} orderBy={orderBy} setOrderBy={setOrderBy} heroes={characters} setFilteredHeroes={setFilteredCharacters}/>
       <ul>
-        {characters.map((character) => (
+        {filteredCharacters.map((character) => (
           <li key={character.id}>
             <Card
               id={character.id}
@@ -72,7 +74,7 @@ const CharacterList = ({ searchValue }: CharacterListProps) => {
           </li>
         ))}
       </ul>
-      <div className="pagination">
+      <div className="button-pages">
         <PaginationButton className="left" onClick={handlePreviousPage} disabled={page === 0} />
         <PaginationButton className="right" onClick={handleNextPage} disabled={(page + 1) * limit >= total} />
       </div>
