@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "composite": true,
-    "types": ["node", "vite/client"],
+    "types": ["jest", "vite/client", "@testing-library/jest-dom"],
     "lib": [
       "dom",
       "dom.iterable",

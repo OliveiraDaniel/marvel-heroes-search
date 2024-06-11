@@ -18,3 +18,15 @@ export const Input = styled.input`
         color: #fa7c7c;
     }
 `
+
+export const StyledSearchContainer = styled.div` 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 35px 0;
+
+  @media (max-width: 500px) {
+    width: 95%;
+  }
+`
