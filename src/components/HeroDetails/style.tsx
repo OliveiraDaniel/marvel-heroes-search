@@ -141,6 +141,10 @@ export const ContainerLastComics = styled.div`
             align-items: center;
             justify-content: space-between;
 
+            @media (max-width: 500px) {
+                width: auto;
+            }
+
             img {
                 display: flex;
                 justify-content: start;
