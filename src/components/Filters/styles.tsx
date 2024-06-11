@@ -27,6 +27,9 @@ export const StyledFilters = styled.div`
       img {
         margin: auto 15px;
         cursor: pointer;
+        @media (max-width: 500px) {
+          margin: auto 5px;
+        }
       }
     }
 

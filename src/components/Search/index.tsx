@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { SearchProps } from "../../types/SearchProps";
-import { Input } from "./style";
+import { Input, StyledSearchContainer } from "./style";
 
 interface SearchComponentProps extends SearchProps {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
+  onSearchChange: (value: string) => void
 }
 
 export default function Search({ placeholder, setSearchValue }: SearchComponentProps) {
@@ -18,13 +19,13 @@ export default function Search({ placeholder, setSearchValue }: SearchComponentP
   };
 
   return (
-    <div className="search">
+    <StyledSearchContainer>
       <Input
         type="text"
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInputChange}
       />
-    </div>
+    </StyledSearchContainer>
   )
 }
